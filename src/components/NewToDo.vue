@@ -6,6 +6,7 @@
         placeholder="Add a task..."
         class="input"
         v-model="taskName"
+        v-on:keyup.enter="newTask(taskName)"
       />
     </div>
     <div class="column">
@@ -21,7 +22,7 @@ export default {
   name: "NewToDo",
   methods: {
     newTask(input) {
-      if (input != null) {
+      if (input != null && input != "") {
         console.log(input);
         this.$emit("sendTask", input);
       } else {

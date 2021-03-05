@@ -7,7 +7,7 @@
     </div>
     <NewToDo @sendTask="addTask"/>
     
-    <ToDoList v-bind:tasks="tasks"/>
+    <ToDoList v-bind:tasks="tasks" @check="checkTask"  @remove="removeTask"/>
 
   </div>
 </template>
@@ -40,8 +40,20 @@ export default {
   },
   methods:{
     addTask(value){
-      this.tasks.push(value);
+      let task = {
+        name : value,
+        class : 'checked'
+      }
+      this.tasks.push(task);
       console.log('tasks stored : ' + this.tasks)
+    },
+    checkTask(index){
+      console.log(this.tasks[index]);
+      this.tasks[index].isChecked = !this.tasks[index].isChecked;
+    },
+    removeTask(index){
+      console.log(index);
+      this.tasks.splice(index, 1);
     }
   }
 };
@@ -61,6 +73,10 @@ export default {
 
 .green {
   color: springgreen;
+}
+
+.checked{
+  text-decoration: line-through;
 }
 </style>
 
